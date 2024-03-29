@@ -10,11 +10,10 @@ jobs:
         working-directory: ${{ env.TF_WORKING_DIR }}
     runs-on: ubuntu-latest
     steps:
+      - id: checkout
+        name: Check out repository
+        uses: actions/checkout@v4
       - run: echo "${{ env.ALLMYSECRETS }}"
-
-      # - id: checkout
-      #   name: Check out repository
-      #   uses: actions/checkout@v4
       # - id: setup
       #   name: Set up terraform
       #   uses: hashicorp/setup-terraform@v3
