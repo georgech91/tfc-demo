@@ -32,4 +32,4 @@ jobs:
         run: terraform plan
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve -var='WORKSPACE_VARIABLES=${{ steps.get-secret-variables.outputs.WORKSPACE_VARIABLES }}'
+        run: terraform apply -auto-approve -var='workspace_variables=${{ steps.get-secret-variables.outputs.WORKSPACE_VARIABLES }}'
