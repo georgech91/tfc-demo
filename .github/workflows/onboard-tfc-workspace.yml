@@ -16,20 +16,20 @@ jobs:
       - id: get-secret-variables
         name: Get secret workspace variables
         run: |
-          variables=$( echo "${{ env.ALLMYSECRETS }}" | jq -c '[to_entries | .[] | select(.key | startswith("TF_SECRET")) += {"category":"terraform", "sensitive":true} | select(.key | startswith("ENV_SECRET")) += {"category":"env", "sensitive":true} | select(.key | startswith("ENV_SECRET") or startswith("TF_SECRET"))]' )
+          variables=$(echo '${{ env.ALLMYSECRETS }}' | jq -c '[to_entries | .[] | select(.key | startswith("TF_SECRET")) += {"category":"terraform", "sensitive":true} | select(.key | startswith("ENV_SECRET")) += {"category":"env", "sensitive":true} | select(.key | startswith("ENV_SECRET") or startswith("TF_SECRET"))]')
           echo $variables
           echo "WORKSPACE_VARIABLES=$variables" >> "$GITHUB_OUTPUT"
-      - id: setup
-        name: Set up terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-      - name: Terraform Init
-        id: init
-        run: terraform init
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan
-      - name: Terraform Apply
-        id: apply
-        run: terraform apply -auto-approve -var='WORKSPACE_VARIABLES=${{ steps.get-secret-variables.outputs.WORKSPACE_VARIABLES }}'
+      # - id: setup
+      #   name: Set up terraform
+      #   uses: hashicorp/setup-terraform@v3
+      #   with:
+      #     cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      # - name: Terraform Init
+      #   id: init
+      #   run: terraform init
+      # - name: Terraform Plan
+      #   id: plan
+      #   run: terraform plan
+      # - name: Terraform Apply
+      #   id: apply
+      #   run: terraform apply -auto-approve -var='WORKSPACE_VARIABLES=${{ steps.get-secret-variables.outputs.WORKSPACE_VARIABLES }}'
