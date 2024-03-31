@@ -16,7 +16,7 @@ jobs:
       - id: get-secret-variables
         name: Get secret workspace variables
         run: |
-          variables=$(echo "${{ env.ALLMYSECRETS }}" | jq -c '[to_entries | .[] | select(.key | startswith("TF_SECRET")) += {"category":"terraform", "sensitive":true} | select(.key | startswith("ENV_SECRET")) += {"category":"env", "sensitive":true} | select(.key | startswith("ENV_SECRET") or startswith("TF_SECRET"))]')
+          variables=$( echo "${{ env.ALLMYSECRETS }}" | jq -c '[to_entries | .[] | select(.key | startswith("TF_SECRET")) += {"category":"terraform", "sensitive":true} | select(.key | startswith("ENV_SECRET")) += {"category":"env", "sensitive":true} | select(.key | startswith("ENV_SECRET") or startswith("TF_SECRET"))]' )
           echo $variables
           echo "WORKSPACE_VARIABLES=$variables" >> "$GITHUB_OUTPUT"
       - id: setup
