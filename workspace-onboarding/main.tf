@@ -4,7 +4,7 @@ provider "tfe" {
 
 module "create-workspace" {
   source                               = "app.terraform.io/georg/create-workspace/tfe"
-  version                              = "1.0.7"
+  version                              = "1.0.8"
   org_name                             = var.org_name
   project_name                         = var.project_name
   workspace_name                       = var.workspace_name
