@@ -2,7 +2,7 @@ provider "tfe" {
   token = var.tfe_token
 }
 
-module "tfc-demo" {
+module "create-workspace" {
   source                               = "app.terraform.io/georg/create-workspace/tfe"
   version                              = "1.0.7"
   org_name                             = var.org_name
