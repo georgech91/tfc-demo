@@ -29,7 +29,7 @@ jobs:
         run: terraform init
       - name: Terraform Plan
         id: plan
-        run: terraform plan
+        run: terraform plan -var='workspace_variables=${{ steps.get-secret-variables.outputs.WORKSPACE_VARIABLES }}' -var='tfe_token=${{ secrets.TF_API_TOKEN }}'
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve -var='workspace_variables=${{ steps.get-secret-variables.outputs.WORKSPACE_VARIABLES }}'
+        run: terraform apply -auto-approve -var='workspace_variables=${{ steps.get-secret-variables.outputs.WORKSPACE_VARIABLES }}' -var='tfe_token=${{ secrets.TF_API_TOKEN }}'

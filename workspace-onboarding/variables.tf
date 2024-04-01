@@ -1,8 +1,3 @@
-variable "tfe_token" {
-  default   = ""
-  sensitive = true
-}
-
 variable "org_name" {
   default = ""
 }
@@ -27,10 +22,6 @@ variable "project_name" {
   default = ""
 }
 
-variable "service_provider" {
-  default = ""
-}
-
 variable "workspace_variables" {
   default = []
   type = set(object({
@@ -52,4 +43,13 @@ variable "workspace_variables" {
 
 variable "tags_regex" {
   default = ""
+}
+
+variable "oauth_client_id" {
+  default = ""
+}
+
+variable "tfe_token" {
+  default   = ""
+  sensitive = true
 }
