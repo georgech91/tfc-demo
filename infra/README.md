@@ -19,7 +19,7 @@
 3. Create a principal like 'terraform' and add following roles
   - IAM Workload Identity Pool Admin
   - Service Account Admin
-  - Artifact Registry Repository Administrator
+  - Artifact Registry Administrator
   - Artifact Registry Repository IAM Writer
   
 
