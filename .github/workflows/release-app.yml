@@ -1,0 +1,58 @@
+name: Release App
+on: [push]
+env:
+  WORKLOAD_IDENTITY_PROVIDER_ID: "projects/836223963401/locations/global/workloadIdentityPools/github/providers/github"
+  SERVICE_ACCOUNT_EMAIL: "github@fluent-potion-419017.iam.gserviceaccount.com"
+  PROJECT_ID: "fluent-potion-419017"
+  REGISTRY: "northamerica-northeast2-docker.pkg.dev"
+jobs:
+  docker-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - id: auth
+        name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER_ID }}
+          service_account: ${{ env.SERVICE_ACCOUNT_EMAIL }}
+          access_token_lifetime: 600s
+
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Get tag
+        id: get-tag
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+
+      - id: docker-push-tagged
+        name: Tag Docker image and push to Google Artifact Registry
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        uses: docker/build-push-action@v5
+        with:
+          context: ./app
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/docker/go-greet:${{ steps.get-tag.outputs.tag }}
+
+      - id: docker-test-build
+        name: Test docker build
+        if: ${{ github.event_name == 'push' && ! startsWith(github.ref, 'refs/tags') }}
+        uses: docker/build-push-action@v5
+        with:
+          context: ./app
+          load: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/docker/go-greet:test
