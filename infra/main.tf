@@ -8,7 +8,7 @@ resource "google_iam_workload_identity_pool" "workload_identity_pool" {
 }
 
 resource "google_iam_workload_identity_pool_provider" "workload_identity_pool_provider" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.workload_identity_pool.id
+  workload_identity_pool_id          = google_iam_workload_identity_pool.workload_identity_pool.workload_identity_pool_id
   workload_identity_pool_provider_id = var.workload_identity_pool_provider_id
   attribute_mapping = {
     "google.subject"             = "assertion.sub"
