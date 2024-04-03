@@ -8,12 +8,12 @@ resource "google_iam_workload_identity_pool" "workload_identity_pool" {
 }
 
 resource "google_iam_workload_identity_pool_provider" "workload_identity_pool_provider" {
-  workload_identity_pool_id = google_iam_workload_identity_pool.workload_identity_pool.id
+  workload_identity_pool_id          = google_iam_workload_identity_pool.workload_identity_pool.id
   workload_identity_pool_provider_id = var.workload_identity_pool_provider_id
   attribute_mapping = {
-    "google.subject"  = "assertion.sub"
-    "attribute.actor" = "assertion.actor"
-    "attribute.repository" = "assertion.repository"
+    "google.subject"             = "assertion.sub"
+    "attribute.actor"            = "assertion.actor"
+    "attribute.repository"       = "assertion.repository"
     "attribute.repository_owner" = "assertion.repository_owner"
   }
   attribute_condition = "assertion.repository_owner == 'georgech91'"
@@ -42,8 +42,8 @@ resource "google_artifact_registry_repository" "docker_repo" {
 }
 
 resource "google_artifact_registry_repository_iam_member" "docker_repo_iam" {
-  location = google_artifact_registry_repository.docker_repo.location
+  location   = google_artifact_registry_repository.docker_repo.location
   repository = google_artifact_registry_repository.docker_repo.name
-  role   = "roles/artifactregistry.repoAdmin"
-  member = "serviceAccount:${google_service_account.service_account.email}"
+  role       = "roles/artifactregistry.repoAdmin"
+  member     = "serviceAccount:${google_service_account.service_account.email}"
 }
