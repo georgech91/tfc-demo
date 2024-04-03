@@ -1,5 +1,5 @@
 name: Release App
-on: [push]
+on: [push, pull_request]
 env:
   WORKLOAD_IDENTITY_PROVIDER_ID: "projects/836223963401/locations/global/workloadIdentityPools/github/providers/github"
   SERVICE_ACCOUNT_EMAIL: "github@fluent-potion-419017.iam.gserviceaccount.com"
@@ -7,7 +7,7 @@ env:
   REGISTRY: "northamerica-northeast2-docker.pkg.dev"
 jobs:
   docker-release:
-    if: github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/pull'))
+    if: (github.event_name == 'push' || github.event_name == 'pull_request') && (startsWith(github.ref, 'refs/tags/v') || startsWith(github.ref, 'refs/pull'))
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
@@ -50,7 +50,7 @@ jobs:
 
       - id: docker-test-build
         name: Test Docker build
-        if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/pull') }}
+        if: startsWith(github.ref, 'refs/pull')
         uses: docker/build-push-action@v5
         with:
           context: ./app
