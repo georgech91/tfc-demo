@@ -123,8 +123,8 @@ resource "google_compute_instance_template" "app_instance_template" {
   }
 }
 
-resource "google_compute_instance_from_template" "app_instance" {
-  name                     = "app-instance"
-  zone                     = var.app_zone
-  source_instance_template = google_compute_instance_template.app_instance_template.self_link_unique
-}
+# resource "google_compute_instance_from_template" "app_instance" {
+#   name                     = "app-instance"
+#   zone                     = var.app_zone
+#   source_instance_template = google_compute_instance_template.app_instance_template.self_link_unique
+# }
