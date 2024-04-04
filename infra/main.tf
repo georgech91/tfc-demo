@@ -112,7 +112,7 @@ resource "google_compute_instance_template" "app_instance_template" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.app_subnet.name
+    subnetwork = google_compute_subnetwork.app_subnet.self_link
     access_config {
       // Ephemeral IP
     }

@@ -14,6 +14,18 @@
   - artifactregistry.repositories.getIamPolicy
   - artifactregistry.repositories.setIamPolicy
 5. Click Create
+6. Click Create Role
+7. Enter
+  - Title: Compute Firewall Admin
+  - Description: Compute Firewall Admin
+  - ID: compute.firewallAdmin
+8. Add permissions
+  - compute.firewalls.create
+  - compute.firewalls.delete
+  - compute.firewalls.get
+  - compute.firewalls.list
+  - compute.firewalls.update
+9. Click Create
 ### Setup Terraform Service Account
 1. Go to IAM & Admin > IAM
 2. Click Add
@@ -24,5 +36,6 @@
   - Artifact Registry Repository IAM Writer
   - Compute Instance Admin (v1)
   - Compute Network Admin
+  - Compute Firewall Admin
   
 
