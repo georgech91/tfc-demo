@@ -1,5 +1,14 @@
 name: Release App
-on: [push, pull_request]
+on:
+  push:
+    tags:
+      - v**
+  pull_request:
+    types:
+      - closed
+      - opened
+      - reopened
+      - synchronize
 env:
   WORKLOAD_IDENTITY_PROVIDER_ID: "projects/836223963401/locations/global/workloadIdentityPools/github/providers/github"
   SERVICE_ACCOUNT_EMAIL: "github@fluent-potion-419017.iam.gserviceaccount.com"
@@ -49,7 +58,7 @@ jobs:
 
       - id: docker-test-build
         name: Test Docker build
-        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         uses: docker/build-push-action@v5
         with:
           context: ./app
