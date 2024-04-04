@@ -37,5 +37,11 @@
   - Compute Instance Admin (v1)
   - Compute Network Admin
   - Compute Firewall Admin
+4. Go to IAM & Admin > Service Accounts
+5. Click 836223963401-compute@developer.gserviceaccount.com
+6. Click Permissions
+7. Click Grant Access
+8. Enter terraform service account email as principal
+9. Add Service Account User role
   
 

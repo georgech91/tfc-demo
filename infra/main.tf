@@ -75,7 +75,7 @@ resource "google_compute_subnetwork" "app_subnet" {
 }
 
 resource "google_compute_firewall" "app_firewall" {
-  name    = "flask-app-firewall"
+  name    = "app-firewall"
   network = google_compute_network.app_network.id
 
   allow {
