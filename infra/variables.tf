@@ -23,3 +23,23 @@ variable "docker_repo_location" {
   default = ""
 }
 
+variable "app_image" {
+  default = ""
+}
+
+variable "subnet_region" {
+  default = ""
+}
+
+variable "subnet_range" {
+  default = ""
+}
+
+variable "app_port" {
+  default = ""
+}
+
+variable "app_zone" {
+  default = ""
+}
+

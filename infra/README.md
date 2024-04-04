@@ -1,6 +1,7 @@
 ### Enable Google Cloud APIs
   - Identity and Access Management (IAM) API
   - Artifact Registry API
+  - Compute Engine API
 ### Create custom iam roles
 1. Go to IAM & Admin > Roles
 2. Click Create Role
@@ -21,5 +22,7 @@
   - Service Account Admin
   - Artifact Registry Administrator
   - Artifact Registry Repository IAM Writer
+  - Compute Instance Admin (v1)
+  - Compute Network Admin
   
 
