@@ -1,6 +1,6 @@
-# provider "tfe" {
-#   token = var.tfe_token
-# }
+provider "tfe" {
+  token = var.tfe_token
+}
 
 # module "create-workspace" {
 #   source                               = "app.terraform.io/georg/create-workspace/tfe"
