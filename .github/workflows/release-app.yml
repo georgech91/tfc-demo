@@ -10,7 +10,7 @@ on:
       - reopened
       - synchronize
 env:
-  WORKLOAD_IDENTITY_PROVIDER_ID: "projects/836223963401/locations/global/workloadIdentityPools/github/providers/github"
+  WORKLOAD_IDENTITY_PROVIDER_ID: "projects/836223963401/locations/global/workloadIdentityPools/github2/providers/github"
   SERVICE_ACCOUNT_EMAIL: "github@fluent-potion-419017.iam.gserviceaccount.com"
   PROJECT_ID: "fluent-potion-419017"
   REGISTRY: "northamerica-northeast2-docker.pkg.dev"
