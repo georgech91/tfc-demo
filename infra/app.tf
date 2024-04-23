@@ -24,16 +24,16 @@ resource "google_compute_subnetwork" "app_subnet" {
   network       = google_compute_network.app_network.id
 }
 
-# resource "google_compute_firewall" "app_firewall" {
-#   name    = "app-firewall"
-#   network = google_compute_network.app_network.id
+resource "google_compute_firewall" "app_firewall" {
+  name    = "app-firewall"
+  network = google_compute_network.app_network.id
 
-#   allow {
-#     protocol = "tcp"
-#     ports    = [var.app_port]
-#   }
-#   source_ranges = ["0.0.0.0/0"]
-# }
+  allow {
+    protocol = "tcp"
+    ports    = [var.app_port]
+  }
+  source_ranges = ["0.0.0.0/0"]
+}
 
 resource "google_compute_instance_template" "app_instance_template" {
   name        = "app-instance-template"
